@@ -26,6 +26,7 @@ public class PlayerCollision : MonoBehaviour
         if (other.gameObject.CompareTag("Ground"))
         {
             gameObject.GetComponent<PlayerMovement>().SetJumpStatus(false);
+            
         }
     }
 
@@ -33,5 +34,15 @@ public class PlayerCollision : MonoBehaviour
     {
         Debug.Log(name + " Tigger con" + other.gameObject.name);
         Destroy(other.gameObject);
+    }
+
+    //Al trabajar con un characterController este es el único método disponible para detectar colisiones.
+    private void OnControllerColliderHit(ControllerColliderHit hit) {
+        //Se ejecuta cada framme
+        Debug.Log(name + " COLISION CON " + hit.gameObject.name);
+        if (hit.gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log("GAME OVER");
+        }
     }
 }
